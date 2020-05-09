@@ -1,0 +1,264 @@
+Abstract Class
+A class which contains the abstract keyword in its declaration is known as abstract class.
+
+Abstract classes may or may not contain abstract methods, i.e., methods without body ( public void get(); )
+
+But, if a class has at least one abstract method, then the class must be declared abstract.
+
+If a class is declared abstract, it cannot be instantiated.
+
+To use an abstract class, you have to inherit it from another class, provide implementations to the abstract methods in it.
+
+If you inherit an abstract class, you have to provide implementations to all the abstract methods in it.
+
+Example
+This section provides you an example of the abstract class. To create an abstract class, just use the abstract keyword before the class keyword, in the class declaration.
+
+/* File name : Employee.java */
+public abstract class Employee {
+   private String name;
+   private String address;
+   private int number;
+
+   public Employee(String name, String address, int number) {
+      System.out.println("Constructing an Employee");
+      this.name = name;
+      this.address = address;
+      this.number = number;
+   }
+   
+   public double computePay() {
+     System.out.println("Inside Employee computePay");
+     return 0.0;
+   }
+   
+   public void mailCheck() {
+      System.out.println("Mailing a check to " + this.name + " " + this.address);
+   }
+
+   public String toString() {
+      return name + " " + address + " " + number;
+   }
+
+   public String getName() {
+      return name;
+   }
+ 
+   public String getAddress() {
+      return address;
+   }
+   
+   public void setAddress(String newAddress) {
+      address = newAddress;
+   }
+ 
+   public int getNumber() {
+      return number;
+   }
+}
+You can observe that except abstract methods the Employee class is same as normal class in Java. The class is now abstract, but it still has three fields, seven methods, and one constructor.
+
+Now you can try to instantiate the Employee class in the following way −
+
+/* File name : AbstractDemo.java */
+public class AbstractDemo {
+
+   public static void main(String [] args) {
+      /* Following is not allowed and would raise error */
+      Employee e = new Employee("George W.", "Houston, TX", 43);
+      System.out.println("\n Call mailCheck using Employee reference--");
+      e.mailCheck();
+   }
+}
+When you compile the above class, it gives you the following error −
+
+Employee.java:46: Employee is abstract; cannot be instantiated
+      Employee e = new Employee("George W.", "Houston, TX", 43);
+                   ^
+1 error
+Inheriting the Abstract Class
+We can inherit the properties of Employee class just like concrete class in the following way −
+
+Example
+/* File name : Salary.java */
+public class Salary extends Employee {
+   private double salary;   // Annual salary
+   
+   public Salary(String name, String address, int number, double salary) {
+      super(name, address, number);
+      setSalary(salary);
+   }
+   
+   public void mailCheck() {
+      System.out.println("Within mailCheck of Salary class ");
+      System.out.println("Mailing check to " + getName() + " with salary " + salary);
+   }
+ 
+   public double getSalary() {
+      return salary;
+   }
+   
+   public void setSalary(double newSalary) {
+      if(newSalary >= 0.0) {
+         salary = newSalary;
+      }
+   }
+   
+   public double computePay() {
+      System.out.println("Computing salary pay for " + getName());
+      return salary/52;
+   }
+}
+Here, you cannot instantiate the Employee class, but you can instantiate the Salary Class, and using this instance you can access all the three fields and seven methods of Employee class as shown below.
+
+/* File name : AbstractDemo.java */
+public class AbstractDemo {
+
+   public static void main(String [] args) {
+      Salary s = new Salary("Mohd Mohtashim", "Ambehta, UP", 3, 3600.00);
+      Employee e = new Salary("John Adams", "Boston, MA", 2, 2400.00);
+      System.out.println("Call mailCheck using Salary reference --");
+      s.mailCheck();
+      System.out.println("\n Call mailCheck using Employee reference--");
+      e.mailCheck();
+   }
+}
+This produces the following result −
+
+Output
+Constructing an Employee
+Constructing an Employee
+Call mailCheck using Salary reference --
+Within mailCheck of Salary class 
+Mailing check to Mohd Mohtashim with salary 3600.0
+
+ Call mailCheck using Employee reference--
+Within mailCheck of Salary class 
+Mailing check to John Adams with salary 2400.0
+Abstract Methods
+If you want a class to contain a particular method but you want the actual implementation of that method to be determined by child classes, you can declare the method in the parent class as an abstract.
+
+abstract keyword is used to declare the method as abstract.
+
+You have to place the abstract keyword before the method name in the method declaration.
+
+An abstract method contains a method signature, but no method body.
+
+Instead of curly braces, an abstract method will have a semoi colon (;) at the end.
+
+Following is an example of the abstract method.
+
+Example
+public abstract class Employee {
+   private String name;
+   private String address;
+   private int number;
+   
+   public abstract double computePay();
+   // Remainder of class definition
+}
+Declaring a method as abstract has two consequences −
+
+The class containing it must be declared as abstract.
+
+Any class inheriting the current class must either override the abstract method or declare itself as abstract.
+
+Note − Eventually, a descendant class has to implement the abstract method; otherwise, you would have a hierarchy of abstract classes that cannot be instantiated.
+
+Suppose Salary class inherits the Employee class, then it should implement the computePay() method as shown below −
+
+/* File name : Salary.java */
+public class Salary extends Employee {
+   private double salary;   // Annual salary
+  
+   public double computePay() {
+      System.out.println("Computing salary pay for " + getName());
+      return salary/52;
+   }
+   // Remainder of class definition
+}
+
+An interface is similar to a class in the following ways −
+
+An interface can contain any number of methods.
+
+An interface is written in a file with a .java extension, with the name of the interface matching the name of the file.
+
+The byte code of an interface appears in a .class file.
+
+Interfaces appear in packages, and their corresponding bytecode file must be in a directory structure that matches the package name.
+
+However, an interface is different from a class in several ways, including −
+
+You cannot instantiate an interface.
+
+An interface does not contain any constructors.
+
+All of the methods in an interface are abstract.
+
+An interface cannot contain instance fields. The only fields that can appear in an interface must be declared both static and final.
+
+An interface is not extended by a class; it is implemented by a class.
+
+An interface can extend multiple interfaces.
+
+Declaring Interfaces
+The interface keyword is used to declare an interface. Here is a simple example to declare an interface −
+
+Example
+Following is an example of an interface −
+
+/* File name : NameOfInterface.java */
+import java.lang.*;
+// Any number of import statements
+
+public interface NameOfInterface {
+   // Any number of final, static fields
+   // Any number of abstract method declarations\
+}
+Interfaces have the following properties −
+
+An interface is implicitly abstract. You do not need to use the abstract keyword while declaring an interface.
+
+Each method in an interface is also implicitly abstract, so the abstract keyword is not needed.
+
+Methods in an interface are implicitly public.
+
+Example
+/* File name : Animal.java */
+interface Animal {
+   public void eat();
+   public void travel();
+}
+Implementing Interfaces
+When a class implements an interface, you can think of the class as signing a contract, agreeing to perform the specific behaviors of the interface. If a class does not perform all the behaviors of the interface, the class must declare itself as abstract.
+
+A class uses the implements keyword to implement an interface. The implements keyword appears in the class declaration following the extends portion of the declaration.
+
+Example
+/* File name : MammalInt.java */
+public class MammalInt implements Animal {
+
+   public void eat() {
+      System.out.println("Mammal eats");
+   }
+
+   public void travel() {
+      System.out.println("Mammal travels");
+   } 
+
+   public int noOfLegs() {
+      return 0;
+   }
+
+   public static void main(String args[]) {
+      MammalInt m = new MammalInt();
+      m.eat();
+      m.travel();
+   }
+} 
+This will produce the following result −
+
+Output
+Mammal eats
+Mammal travels

@@ -1,0 +1,451 @@
+Variables in Java:
+
+A variable provides us with named storage that our programs can manipulate. Each variable in Java has a specific type, which determines the size and layout of the variable's memory; the range of values that can be stored within that memory; and the set of operations that can be applied to the variable.
+You must declare all variables before they can be used. Following is the basic form of a variable declaration −
+data type variable [ = value][, variable [ = value] ...] ;
+Here data type is one of Java's datatypes and variable is the name of the variable. To declare more than one variable of the specified type, you can use a comma-separated list.
+Following are valid examples of variable declaration and initialization in Java −
+Example
+int a, b, c;         // Declares three ints, a, b, and c.
+int a = 10, b = 10;  // Example of initialization
+byte B = 22;         // initializes a byte type variable B.
+double pi = 3.14159; // declares and assigns a value of PI.
+char a = 'a';        // the char variable a iis initialized with value 'a'
+This chapter will explain various variable types available in Java Language. There are three kinds of variables in Java −
+•	Local variables
+•	Instance variables
+•	Class/Static variables
+Local Variables
+•	Local variables are declared in methods, constructors, or blocks.
+•	Local variables are created when the method, constructor or block is entered and the variable will be destroyed once it exits the method, constructor, or block.
+•	Access modifiers cannot be used for local variables.
+•	Local variables are visible only within the declared method, constructor, or block.
+•	Local variables are implemented at stack level internally.
+•	There is no default value for local variables, so local variables should be declared and an initial value should be assigned before the first use.
+Example
+Here, age is a local variable. This is defined inside pupAge() method and its scope is limited to only this method.
+Live Demo
+public class Test {
+   public void pupAge() {
+      int age = 0;
+      age = age + 7;
+      System.out.println("Puppy age is : " + age);
+   }
+
+   public static void main(String args[]) {
+      Test test = new Test();
+      test.pupAge();
+   }
+}
+This will produce the following result −
+Output
+Puppy age is: 7
+Example
+Following example uses age without initializing it, so it would give an error at the time of compilation.
+Live Demo
+public class Test {
+   public void pupAge() {
+      int age;
+      age = age + 7;
+      System.out.println("Puppy age is : " + age);
+   }
+
+   public static void main(String args[]) {
+      Test test = new Test();
+      test.pupAge();
+   }
+}
+This will produce the following error while compiling it −
+Output
+Test.java:4:variable number might not have been initialized
+age = age + 7;
+         ^
+1 error
+Instance Variables
+•	Instance variables are declared in a class, but outside a method, constructor or any block.
+•	When a space is allocated for an object in the heap, a slot for each instance variable value is created.
+•	Instance variables are created when an object is created with the use of the keyword 'new' and destroyed when the object is destroyed.
+•	Instance variables hold values that must be referenced by more than one method, constructor or block, or essential parts of an object's state that must be present throughout the class.
+•	Instance variables can be declared in class level before or after use.
+•	Access modifiers can be given for instance variables.
+•	The instance variables are visible for all methods, constructors and block in the class. Normally, it is recommended to make these variables private (access level). However, visibility for subclasses can be given for these variables with the use of access modifiers.
+•	Instance variables have default values. For numbers, the default value is 0, for Booleans it is false, and for object references it is null. Values can be assigned during the declaration or within the constructor.
+•	Instance variables can be accessed directly by calling the variable name inside the class. However, within static methods (when instance variables are given accessibility), they should be called using the fully qualified name. ObjectReference.VariableName.
+Example
+Live Demo
+import java.io.*;
+public class Employee {
+
+   // this instance variable is visible for any child class.
+   public String name;
+
+   // salary  variable is visible in Employee class only.
+   private double salary;
+
+   // The name variable is assigned in the constructor.
+   public Employee (String empName) {
+      name = empName;
+   }
+
+   // The salary variable is assigned a value.
+   public void setSalary(double empSal) {
+      salary = empSal;
+   }
+
+   // This method prints the employee details.
+   public void printEmp() {
+      System.out.println("name  : " + name );
+      System.out.println("salary :" + salary);
+   }
+
+   public static void main(String args[]) {
+      Employee empOne = new Employee("Ransika");
+      empOne.setSalary(1000);
+      empOne.printEmp();
+   }
+}
+This will produce the following result −
+Output
+name  : Ransika
+salary :1000.0
+Class/Static Variables
+•	Class variables also known as static variables are declared with the static keyword in a class, but outside a method, constructor or a block.
+•	There would only be one copy of each class variable per class, regardless of how many objects are created from it.
+•	Static variables are rarely used other than being declared as constants. Constants are variables that are declared as public/private, final, and static. Constant variables never change from their initial value.
+•	Static variables are stored in the static memory. It is rare to use static variables other than declared final and used as either public or private constants.
+•	Static variables are created when the program starts and destroyed when the program stops.
+•	Visibility is similar to instance variables. However, most static variables are declared public since they must be available for users of the class.
+•	Default values are same as instance variables. For numbers, the default value is 0; for Booleans, it is false; and for object references, it is null. Values can be assigned during the declaration or within the constructor. Additionally, values can be assigned in special static initializer blocks.
+•	Static variables can be accessed by calling with the class name ClassName.VariableName.
+•	When declaring class variables as public static final, then variable names (constants) are all in upper case. If the static variables are not public and final, the naming syntax is the same as instance and local variables.
+
+
+
+
+
+
+Example
+Live Demo
+import java.io.*;
+public class Employee {
+
+   // salary  variable is a private static variable
+   private static double salary;
+
+   // DEPARTMENT is a constant
+   public static final String DEPARTMENT = "Development ";
+
+   public static void main(String args[]) {
+      salary = 1000;
+      System.out.println(DEPARTMENT + "average salary:" + salary);
+   }
+}
+This will produce the following result −
+Output
+Development average salary:1000
+Note − If the variables are accessed from an outside class, the constant should be accessed as Employee.DEPARTMENT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data Types in Java:
+
+
+There are two data types available in Java −
+•	Primitive Data Types
+•	Reference/Object Data Types
+Primitive Data Types
+There are eight primitive datatypes supported by Java. Primitive datatypes are predefined by the language and named by a keyword. Let us now look into the eight primitive data types in detail.
+byte
+•	Byte data type is an 8-bit signed two's complement integer
+•	Minimum value is -128 (-2^7)
+•	Maximum value is 127 (inclusive)(2^7 -1)
+•	Default value is 0
+•	Byte data type is used to save space in large arrays, mainly in place of integers, since a byte is four times smaller than an integer.
+•	Example: byte a = 100, byte b = -50
+short
+•	Short data type is a 16-bit signed two's complement integer
+•	Minimum value is -32,768 (-2^15)
+•	Maximum value is 32,767 (inclusive) (2^15 -1)
+•	Short data type can also be used to save memory as byte data type. A short is 2 times smaller than an integer
+•	Default value is 0.
+•	Example: short s = 10000, short r = -20000
+int
+•	Int data type is a 32-bit signed two's complement integer.
+•	Minimum value is - 2,147,483,648 (-2^31)
+•	Maximum value is 2,147,483,647(inclusive) (2^31 -1)
+•	Integer is generally used as the default data type for integral values unless there is a concern about memory.
+•	The default value is 0
+•	Example: int a = 100000, int b = -200000
+long
+•	Long data type is a 64-bit signed two's complement integer
+•	Minimum value is -9,223,372,036,854,775,808(-2^63)
+•	Maximum value is 9,223,372,036,854,775,807 (inclusive)(2^63 -1)
+•	This type is used when a wider range than int is needed
+•	Default value is 0L
+•	Example: long a = 100000L, long b = -200000L
+float
+•	Float data type is a single-precision 32-bit IEEE 754 floating point
+•	Float is mainly used to save memory in large arrays of floating point numbers
+•	Default value is 0.0f
+•	Float data type is never used for precise values such as currency
+•	Example: float f1 = 234.5f
+double
+•	double data type is a double-precision 64-bit IEEE 754 floating point
+•	This data type is generally used as the default data type for decimal values, generally the default choice
+•	Double data type should never be used for precise values such as currency
+•	Default value is 0.0d
+•	Example: double d1 = 123.4
+boolean
+•	boolean data type represents one bit of information
+•	There are only two possible values: true and false
+•	This data type is used for simple flags that track true/false conditions
+•	Default value is false
+•	Example: boolean one = true
+char
+•	char data type is a single 16-bit Unicode character
+•	Minimum value is '\u0000' (or 0)
+•	Maximum value is '\uffff' (or 65,535 inclusive)
+•	Char data type is used to store any character
+•	Example: char letterA = 'A'
+Reference Datatypes
+•	Reference variables are created using defined constructors of the classes. They are used to access objects. These variables are declared to be of a specific type that cannot be changed. For example, Employee, Puppy, etc.
+•	Class objects and various type of array variables come under reference datatype.
+•	Default value of any reference variable is null.
+•	A reference variable can be used to refer any object of the declared type or any compatible type.
+•	Example: Animal animal = new Animal("giraffe");
+Java Literals
+A literal is a source code representation of a fixed value. They are represented directly in the code without any computation.
+Literals can be assigned to any primitive type variable. For example −
+byte a = 68;
+char a = 'A';
+byte, int, long, and short can be expressed in decimal(base 10), hexadecimal(base 16) or octal(base 8) number systems as well.
+Prefix 0 is used to indicate octal, and prefix 0x indicates hexadecimal when using these number systems for literals. For example −
+int decimal = 100;
+int octal = 0144;
+int hexa =  0x64;
+String literals in Java are specified like they are in most other languages by enclosing a sequence of characters between a pair of double quotes. Examples of string literals are −
+Example
+"Hello World"
+"two\nlines"
+"\"This is in quotes\""
+String and char types of literals can contain any Unicode characters. For example −
+char a = '\u0001';
+String a = "\u0001";
+Java language supports few special escape sequences for String and char literals as well. They are −
+Notation	Character represented
+\n	Newline (0x0a)
+\r	Carriage return (0x0d)
+\f	Formfeed (0x0c)
+\b	Backspace (0x08)
+\s	Space (0x20)
+\t	tab
+\"	Double quote
+\'	Single quote
+\\	backslash
+\ddd	Octal character (ddd)
+\uxxxx	Hexadecimal UNICODE character (xxxx)
+
+
+
+
+
+
+
+
+
+
+
+Conditional Constructs: 
+Decision making structures have one or more conditions to be evaluated or tested by the program, along with a statement or statements that are to be executed if the condition is determined to be true, and optionally, other statements to be executed if the condition is determined to be false.
+Following is the general form of a typical decision making structure found in most of the programming languages −
+ 
+Java programming language provides following types of decision making statements. Click the following links to check their detail.
+Sr.No.	Statement & Description
+1	if statement
+An if statement consists of a boolean expression followed by one or more statements.
+2	if...else statement
+An if statement can be followed by an optional else statement, which executes when the boolean expression is false.
+3	nested if statement
+You can use one if or else if statement inside another if or else if statement(s).
+4	switch statement
+A switch statement allows a variable to be tested for equality against a list of values.
+The ? : Operator
+We have covered conditional operator ? : in the previous chapter which can be used to replace if...else statements. It has the following general form −
+Exp1 ? Exp2 : Exp3;
+Where Exp1, Exp2, and Exp3 are expressions. Notice the use and placement of the colon.
+To determine the value of the whole expression, initially exp1 is evaluated.
+•	If the value of exp1 is true, then the value of Exp2 will be the value of the whole expression.
+•	If the value of exp1 is false, then Exp3 is evaluated and its value becomes the value of the entire expression.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Looping Constructs:
+There may be a situation when you need to execute a block of code several number of times. In general, statements are executed sequentially: The first statement in a function is executed first, followed by the second, and so on.
+Programming languages provide various control structures that allow for more complicated execution paths.
+A loop statement allows us to execute a statement or group of statements multiple times and following is the general form of a loop statement in most of the programming languages −
+ 
+Java programming language provides the following types of loop to handle looping requirements. Click the following links to check their detail.
+Sr.No.	Loop & Description
+1	while loop
+Repeats a statement or group of statements while a given condition is true. It tests the condition before executing the loop body.
+2	for loop
+Execute a sequence of statements multiple times and abbreviates the code that manages the loop variable.
+3	do...while loop
+Like a while statement, except that it tests the condition at the end of the loop body.
+Loop Control Statements
+Loop control statements change execution from its normal sequence. When execution leaves a scope, all automatic objects that were created in that scope are destroyed.
+Java supports the following control statements. Click the following links to check their detail.
+Sr.No.	Control Statement & Description
+1	break statement
+Terminates the loop or switch statement and transfers execution to the statement immediately following the loop or switch.
+2	continue statement
+Causes the loop to skip the remainder of its body and immediately retest its condition prior to reiterating.
+Enhanced for loop in Java
+As of Java 5, the enhanced for loop was introduced. This is mainly used to traverse collection of elements including arrays.
+Syntax
+Following is the syntax of enhanced for loop −
+for(declaration : expression) {
+   // Statements
+}
+•	Declaration − The newly declared block variable, is of a type compatible with the elements of the array you are accessing. The variable will be available within the for block and its value would be the same as the current array element.
+•	Expression − This evaluates to the array you need to loop through. The expression can be an array variable or method call that returns an array.
+
+
+
+
+
+Example
+Live Demo
+public class Test {
+
+   public static void main(String args[]) {
+      int [] numbers = {10, 20, 30, 40, 50};
+
+      for(int x : numbers ) {
+         System.out.print( x );
+         System.out.print(",");
+      }
+      System.out.print("\n");
+      String [] names = {"James", "Larry", "Tom", "Lacy"};
+
+      for( String name : names ) {
+         System.out.print( name );
+         System.out.print(",");
+      }
+   }
+}
+This will produce the following result −
+Output
+10, 20, 30, 40, 50,
+James, Larry, Tom, Lacy,
+
+
+
+
+
+
+
+
+Arrays in Java:
+Java provides a data structure, the array, which stores a fixed-size sequential collection of elements of the same type. An array is used to store a collection of data, but it is often more useful to think of an array as a collection of variables of the same type.
+Instead of declaring individual variables, such as number0, number1, ..., and number99, you declare one array variable such as numbers and use numbers[0], numbers[1], and ..., numbers[99] to represent individual variables.
+This tutorial introduces how to declare array variables, create arrays, and process arrays using indexed variables.
+Declaring Array Variables
+To use an array in a program, you must declare a variable to reference the array, and you must specify the type of array the variable can reference. Here is the syntax for declaring an array variable −
+Syntax
+dataType[] arrayRefVar;   // preferred way.
+or
+dataType arrayRefVar[];  // works but not preferred way.
+Note − The style dataType[] arrayRefVar is preferred. The style dataType arrayRefVar[] comes from the C/C++ language and was adopted in Java to accommodate C/C++ programmers.
+Example
+The following code snippets are examples of this syntax −
+double[] myList;   // preferred way.
+or
+double myList[];   // works but not preferred way.
+Creating Arrays
+You can create an array by using the new operator with the following syntax −
+Syntax
+arrayRefVar = new dataType[arraySize];
+The above statement does two things −
+•	It creates an array using new dataType[arraySize].
+•	It assigns the reference of the newly created array to the variable arrayRefVar.
+Declaring an array variable, creating an array, and assigning the reference of the array to the variable can be combined in one statement, as shown below −
+dataType[] arrayRefVar = new dataType[arraySize];
+Alternatively you can create arrays as follows −
+dataType[] arrayRefVar = {value0, value1, ..., valuek};
+The array elements are accessed through the index. Array indices are 0-based; that is, they start from 0 to arrayRefVar.length-1.
+Example
+Following statement declares an array variable, myList, creates an array of 10 elements of double type and assigns its reference to myList −
+double[] myList = new double[10];
+Following picture represents array myList. Here, myList holds ten double values and the indices are from 0 to 9.
+ 
+
+
+
+
+Processing Arrays
+When processing array elements, we often use either for loop or foreach loop because all of the elements in an array are of the same type and the size of the array is known.
+
+
+Example
+Here is a complete example showing how to create, initialize, and process arrays −
+Live Demo
+public class TestArray {
+
+   public static void main(String[] args) {
+      double[] myList = {1.9, 2.9, 3.4, 3.5};
+
+      // Print all the array elements
+      for (int i = 0; i < myList.length; i++) {
+         System.out.println(myList[i] + " ");
+      }
+     
+      // Summing all elements
+      double total = 0;
+      for (int i = 0; i < myList.length; i++) {
+         total += myList[i];
+      }
+      System.out.println("Total is " + total);
+      
+      // Finding the largest element
+      double max = myList[0];
+      for (int i = 1; i < myList.length; i++) {
+         if (myList[i] > max) max = myList[i];
+      }
+      System.out.println("Max is " + max);  
+   }
+}
+This will produce the following result −
+Output
+1.9
+2.9
+3.4
+3.5
+Total is 11.7
+Max is 3.5
+

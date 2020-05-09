@@ -1,0 +1,268 @@
+Constructer:
+A constructor initializes an object when it is created. It has the same name as its class and is syntactically similar to a method. However, constructors have no explicit return type.
+Typically, you will use a constructor to give initial values to the instance variables defined by the class, or to perform any other start-up procedures required to create a fully formed object.
+All classes have constructors, whether you define one or not, because Java automatically provides a default constructor that initializes all member variables to zero. However, once you define your own constructor, the default constructor is no longer used.
+Syntax:
+Following is the syntax of a constructor −
+class ClassName {
+   ClassName() {
+   }
+}
+Java allows two types of constructors namely −
+•	No argument Constructors
+•	Parameterized Constructors
+No argument Constructors
+As the name specifies the no argument constructors of Java does not accept any parameters instead, using these constructors the instance variables of a method will be initialized with fixed values for all objects.
+Example
+Public class MyClass {
+   Int num;
+   MyClass() {
+      num = 100;
+   }
+}
+You would call constructor to initialize objects as follows
+public class ConsDemo {
+   public static void main(String args[]) {
+      MyClass t1 = new MyClass();
+      MyClass t2 = new MyClass();
+      System.out.println(t1.num + " " + t2.num);
+   }
+}
+This would produce the following result
+100 100
+Parameterized Constructors
+Most often, you will need a constructor that accepts one or more parameters. Parameters are added to a constructor in the same way that they are added to a method, just declare them inside the parentheses after the constructor's name.
+Example
+Here is a simple example that uses a constructor −
+// A simple constructor.
+class MyClass {
+   int x;
+   
+   // Following is the constructor
+   MyClass(int i ) {
+      x = i;
+   }
+}
+You would call constructor to initialize objects as follows −
+public class ConsDemo {
+   public static void main(String args[]) {
+      MyClass t1 = new MyClass( 10 );
+      MyClass t2 = new MyClass( 20 );
+      System.out.println(t1.x + " " + t2.x);
+   }
+}
+
+This would produce the following result −
+10 20
+
+
+Overloading:
+In the previous chapter, we talked about superclasses and subclasses. If a class inherits a method from its superclass, then there is a chance to override the method provided that it is not marked final.
+The benefit of overriding is: ability to define a behavior that's specific to the subclass type, which means a subclass can implement a parent class method based on its requirement.
+In object-oriented terms, overriding means to override the functionality of an existing method.
+Example
+Let us look at an example.
+
+class Animal {
+   public void move() {
+      System.out.println("Animals can move");
+   }
+}
+
+class Dog extends Animal {
+   public void move() {
+      System.out.println("Dogs can walk and run");
+   }
+}
+
+public class TestDog {
+
+   public static void main(String args[]) {
+      Animal a = new Animal();   // Animal reference and object
+      Animal b = new Dog();   // Animal reference but Dog object
+
+      a.move();   // runs the method in Animal class
+      b.move();   // runs the method in Dog class
+   }
+}
+This will produce the following result −
+Output
+Animals can move
+Dogs can walk and run
+In the above example, you can see that even though b is a type of Animal it runs the move method in the Dog class. The reason for this is: In compile time, the check is made on the reference type. However, in the runtime, JVM figures out the object type and would run the method that belongs to that particular object.
+Therefore, in the above example, the program will compile properly since Animal class has the method move. Then, at the runtime, it runs the method specific for that object.
+Consider the following example −
+Example
+Live Demo
+class Animal {
+   public void move() {
+      System.out.println("Animals can move");
+   }
+}
+
+class Dog extends Animal {
+   public void move() {
+      System.out.println("Dogs can walk and run");
+   }
+   public void bark() {
+      System.out.println("Dogs can bark");
+   }
+}
+
+public class TestDog {
+
+   public static void main(String args[]) {
+      Animal a = new Animal();   // Animal reference and object
+      Animal b = new Dog();   // Animal reference but Dog object
+
+      a.move();   // runs the method in Animal class
+      b.move();   // runs the method in Dog class
+      b.bark();
+   }
+}
+This will produce the following result −
+Output
+TestDog.java:26: error: cannot find symbol
+      b.bark();
+       ^
+  symbol:   method bark()
+  location: variable b of type Animal
+1 error
+This program will throw a compile time error since b's reference type Animal doesn't have a method by the name of bark.
+Rules for Method Overriding
+•	The argument list should be exactly the same as that of the overridden method.
+•	The return type should be the same or a subtype of the return type declared in the original overridden method in the superclass.
+•	The access level cannot be more restrictive than the overridden method's access level. For example: If the superclass method is declared public then the overridding method in the sub class cannot be either private or protected.
+•	Instance methods can be overridden only if they are inherited by the subclass.
+•	A method declared final cannot be overridden.
+•	A method declared static cannot be overridden but can be re-declared.
+•	If a method cannot be inherited, then it cannot be overridden.
+•	A subclass within the same package as the instance's superclass can override any superclass method that is not declared private or final.
+•	A subclass in a different package can only override the non-final methods declared public or protected.
+•	An overriding method can throw any uncheck exceptions, regardless of whether the overridden method throws exceptions or not. However, the overriding method should not throw checked exceptions that are new or broader than the ones declared by the overridden method. The overriding method can throw narrower or fewer exceptions than the overridden method.
+•	Constructors cannot be overridden.
+Using the super Keyword
+When invoking a superclass version of an overridden method the super keyword is used.
+Example
+Live Demo
+class Animal {
+   public void move() {
+      System.out.println("Animals can move");
+   }
+}
+
+class Dog extends Animal {
+   public void move() {
+      super.move();   // invokes the super class method
+      System.out.println("Dogs can walk and run");
+   }
+}
+
+public class TestDog {
+
+   public static void main(String args[]) {
+      Animal b = new Dog();   // Animal reference but Dog object
+      b.move();   // runs the method in Dog class
+   }
+}
+•	The return type should be the same or a subtype of the return type declared in the original overridden method in the superclass.
+•	The access level cannot be more restrictive than the overridden method's access level. For example: If the superclass method is declared public then the overridding method in the sub class cannot be either private or protected.
+•	Instance methods can be overridden only if they are inherited by the subclass.
+•	A method declared final cannot be overridden.
+•	A method declared static cannot be overridden but can be re-declared.
+•	If a method cannot be inherited, then it cannot be overridden.
+•	A subclass within the same package as the instance's superclass can override any superclass method that is not declared private or final.
+•	A subclass in a different package can only override the non-final methods declared public or protected.
+•	An overriding method can throw any uncheck exceptions, regardless of whether the overridden method throws exceptions or not. However, the overriding method should not throw checked exceptions that are new or broader than the ones declared by the overridden method. The overriding method can throw narrower or fewer exceptions than the overridden method.
+•	Constructors cannot be overridden.
+Using the super Keyword
+When invoking a superclass version of an overridden method the super keyword is used.
+Example
+Live Demo
+class Animal {
+   public void move() {
+      System.out.println("Animals can move");
+   }
+}
+
+class Dog extends Animal {
+   public void move() {
+      super.move();   // invokes the super class method
+      System.out.println("Dogs can walk and run");
+   }
+}
+
+public class TestDog {
+
+   public static void main(String args[]) {
+      Animal b = new Dog();   // Animal reference but Dog object
+      b.move();   // runs the method in Dog class
+   }
+}
+•	The return type should be the same or a subtype of the return type declared in the original overridden method in the superclass.
+•	The access level cannot be more restrictive than the overridden method's access level. For example: If the superclass method is declared public then the overridding method in the sub class cannot be either private or protected.
+•	Instance methods can be overridden only if they are inherited by the subclass.
+•	A method declared final cannot be overridden.
+•	A method declared static cannot be overridden but can be re-declared.
+•	If a method cannot be inherited, then it cannot be overridden.
+•	A subclass within the same package as the instance's superclass can override any superclass method that is not declared private or final.
+•	A subclass in a different package can only override the non-final methods declared public or protected.
+•	An overriding method can throw any uncheck exceptions, regardless of whether the overridden method throws exceptions or not. However, the overriding method should not throw checked exceptions that are new or broader than the ones declared by the overridden method. The overriding method can throw narrower or fewer exceptions than the overridden method.
+•	Constructors cannot be overridden.
+Using the super Keyword
+When invoking a superclass version of an overridden method the super keyword is used.
+Example
+Live Demo
+class Animal {
+   public void move() {
+      System.out.println("Animals can move");
+   }
+}
+
+class Dog extends Animal {
+   public void move() {
+      super.move();   // invokes the super class method
+      System.out.println("Dogs can walk and run");
+   }
+}
+
+public class TestDog {
+
+   public static void main(String args[]) {
+      Animal b = new Dog();   // Animal reference but Dog object
+      b.move();   // runs the method in Dog class
+   }
+}
+
+This will produce the following result −
+Output
+Animals can move
+Dogs can walk and run
+
+Garbage Collection:
+
+Introduction
+•	In C/C++, programmer is responsible for both creation and destruction of objects. Usually programmer neglects destruction of useless objects. Due to this negligence, at certain point, for creation of new objects, sufficient memory may not be available and entire program will terminate abnormally causing OutOfMemoryErrors.
+•	But in Java, the programmer need not to care for all those objects which are no longer in use. Garbage collector destroys these objects.
+•	Garbage collector is best example of Daemon thread as it is always running in background.
+•	Main objective of Garbage Collector is to free heap memory by destroying unreachable objects.
+
+Important terms :
+1.	Unreachable objects : An object is said to be unreachable iff it doesn’t contain any reference to it. Also note that objects which are part of island of isolation are also unreachable.
+
+
+Integer i = new Integer(4);
+// the new Integer object is reachable  via the reference in 'i' 
+i = null;
+// the Integer object is no longer reachable. 
+2.	Eligibility for garbage collection : An object is said to be eligible for GC(garbage collection) iff it is unreachable. In above image, after i = null; integer object 4 in heap area is eligible for garbage collection.
+Ways to make an object eligible for GC
+•	Even though the programmer is not responsible to destroy useless objects but it is highly recommended to make an object unreachable(thus eligible for GC) if it is no longer required.
+•	There are generally four different ways to make an object eligible for garbage collection.
+1.	Nullifying the reference variable
+2.	Re-assigning the reference variable
+3.	Object created inside method
+4.	Island of Isolation
+All above ways with examples are discussed in separate article : How to make object eligible for garbage collection
+Ways for requesting JVM to run Garbage Collector
+•	Once we made object eligible for garbage collection, it may not destroy immediately by the garbage collector. Whenever JVM runs the Garbage Collector program, then only the object will be destroyed. But when JVM runs Garbage Collector, we can not expect.
